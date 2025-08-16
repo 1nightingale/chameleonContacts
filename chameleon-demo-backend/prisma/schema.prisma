@@ -1,0 +1,29 @@
+// This schema is a copy of the main backend's schema for the Contact model only
+// No encryption logic is needed here
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Contact {
+  id              String   @id @default(uuid())
+  first_name      String
+  last_name       String
+  organisation    String?
+  telephone       String?
+  email           String?
+  address_street  String?
+  address_city    String?
+  address_region  String?
+  address_country String?
+  age_group       String?
+  gender          String?
+  checkSum        String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
