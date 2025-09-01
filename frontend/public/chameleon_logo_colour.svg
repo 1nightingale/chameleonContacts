@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 500 425"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="chameleon-logo-colour.svg"
+   inkscape:version="1.3 (0e150ed, 2023-07-21)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.55529412"
+     inkscape:cx="249.41737"
+     inkscape:cy="211.59958"
+     inkscape:window-width="1312"
+     inkscape:window-height="742"
+     inkscape:window-x="0"
+     inkscape:window-y="38"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg6" />
+  <defs
+     id="defs5">
+    <!-- Gradient for the chameleon body -->
+    <linearGradient
+       id="chameleonGradient"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="1">
+      <stop
+         offset="0%"
+         stop-color="#43ea6c"
+         id="stop1" />
+      <stop
+         offset="50%"
+         stop-color="#3bb4e7"
+         id="stop2" />
+      <stop
+         offset="100%"
+         stop-color="#a259e6"
+         id="stop3" />
+    </linearGradient>
+    <!-- Gradient for the background (optional, can be removed) -->
+    <linearGradient
+       id="bgGradient"
+       x1="0"
+       y1="0"
+       x2="0"
+       y2="1">
+      <stop
+         offset="0%"
+         stop-color="#e0f7fa"
+         id="stop4" />
+      <stop
+         offset="100%"
+         stop-color="#f3e5f5"
+         id="stop5" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+  	   <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#000" floodOpacity="0.2" />
+	</filter>
+  </defs>
+  <!-- Optional background gradient -->
+  <!-- Chameleon body with gradient -->
+  <path
+     d="M167 36C74 36 0 110 0 202h250c110 0 153 80 153 142 0 54-36 97-73 111 120-32 178-153 108-262C388 36 167 36 167 36z"
+     fill="url(#chameleonGradient)"
+     id="path5"
+     filter="url(#shadow)"
+     stroke="#222"
+     stroke-width="2" />
+  <!-- Eye outer circle -->
+  <circle
+     cx="111"
+     cy="90"
+     r="40"
+     fill="#fffde7"
+     id="circle5"
+     stroke="#222"
+     stroke-width="2" />
+  <!-- Eye inner circle -->
+  <circle
+     cx="127"
+     cy="90"
+     r="18"
+     fill="#2979ff"
+     id="circle6"
+     stroke="#222"
+     stroke-width="2" />
+</svg>
