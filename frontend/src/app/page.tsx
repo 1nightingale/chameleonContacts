@@ -128,7 +128,7 @@ export default function Home() {
         </Typography>
         <Box sx={{ display: { xs: 'none', sm: 'block' }, pr: 1 }}>
           <img
-            src="/chameleonContacts.svg"
+            src="/chameleon_logo_colour.svg"
             alt="Chameleon Logo"
             width={72}
             height={60}
