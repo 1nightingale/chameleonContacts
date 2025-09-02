@@ -1,0 +1,81 @@
+Dockerfile
+# filepath: /Users/timnightingale/Development/chameleonContacts/Dockerfile
+
+# --------- BASE IMAGE ---------
+FROM node:20-alpine AS base
+WORKDIR /app
+
+# --------- BACKEND BUILD ---------
+FROM base AS backend-build
+WORKDIR /app/backend
+COPY backend/package*.json ./
+RUN npm install
+COPY backend .
+# Build step if using TypeScript
+RUN npm run build || true
+
+# --------- FRONTEND BUILD ---------
+FROM base AS frontend-build
+WORKDIR /app/frontend
+COPY frontend/package*.json ./
+RUN npm install
+COPY frontend .
+# Build Next.js frontend
+RUN npm run build
+
+# --------- DEMO BACKEND BUILD ---------
+FROM base AS demo-backend-build
+WORKDIR /app/chameleon-demo-backend
+COPY chameleon-demo-backend/package*.json ./
+RUN npm install
+COPY chameleon-demo-backend .
+# Build step if using TypeScript
+RUN npm run build || true
+
+# --------- FINAL IMAGE ---------
+FROM node:20-alpine
+WORKDIR /app
+
+# Copy built apps
+COPY --from=backend-build /app/backend ./backend
+COPY --from=frontend-build /app/frontend ./frontend
+COPY --from=demo-backend-build /app/chameleon-demo-backend ./chameleon-demo-backend
+
+# --------- ENVIRONMENT VARIABLES (placeholders) ---------
+# Backend
+ENV DATABASE_URL=postgresql://user:password@host:port/dbname
+ENV ENCRYPTION_KEY=your-32-char-encryption-key
+# Frontend
+ENV NEXT_PUBLIC_API_URL=http://localhost:4000
+ENV NEXT_PUBLIC_DEMO_API_URL=http://localhost:5000
+# Demo Backend
+ENV DATABASE_URL=postgresql://user:password@host:port/dbname
+
+# --------- EXPOSE PORTS ---------
+EXPOSE 3000   # Frontend
+EXPOSE 4000   # Backend
+EXPOSE 5000   # Demo Backend
+
+# --------- STARTUP INSTRUCTIONS ---------
+# You can run each service in its own container, or use a process manager like pm2 or run them in separate shells.
+# Example: Start backend, frontend, and demo-backend in parallel (for demo only)
+CMD sh -c "cd backend && npm run start & cd frontend && npm run start & cd ../chameleon-demo-backend && npm run start && wait"
+
+# --------- BUILD INSTRUCTIONS ---------
+# 1. Build the image:
+#    docker build -t chameleon-contacts .
+#
+# 2. Run the containers (example, adjust as needed):
+#    docker run -p 3000:3000 -p 4000:4000 -p 5000:5000 \
+#      -e DATABASE_URL=... \
+#      -e ENCRYPTION_KEY=... \
+#      -e NEXT_PUBLIC_API_URL=... \
+#      -e NEXT_PUBLIC_DEMO_API_URL=... \
+#      chameleon-contacts
+#
+# 3. Or run each service separately using docker-compose for production setups.
+
+# --------- NOTES ---------
+# - Replace environment variable values with your actual secrets and URLs.
+# - For production, use separate containers or a process manager for each service.
+# - You may want to use docker-compose for orchestration and database setup.

@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: backend-build
+    working_dir: /app/backend
+    environment:
+      - DATABASE_URL=postgresql://user:password@host:port/dbname
+      - ENCRYPTION_KEY=your-32-char-encryption-key
+    ports:
+      - "4000:4000"
+    command: npm run start
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend-build
+    working_dir: /app/frontend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:4000
+      - NEXT_PUBLIC_DEMO_API_URL=http://localhost:5000
+    ports:
+      - "3000:3000"
+    command: npm run start
+
+  demo-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: demo-backend-build
+    working_dir: /app/chameleon-demo-backend
+    environment:
+      - DATABASE_URL=postgresql://user:password@host:port/dbname
+    ports:
+      - "5000:5000"
+    command: npm run start
+
+# Optional: add a postgres service if you want to run the DB in Docker as well
+#  db:
+#    image: postgres:16
+#    environment:
+#      POSTGRES_USER: user
+#      POSTGRES_PASSWORD: password
+#      POSTGRES_DB: dbname
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - pgdata:/var/lib/postgresql/data
+#
+# volumes:
+#   pgdata:
