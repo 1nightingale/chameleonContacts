@@ -12,7 +12,7 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.use('/contacts', contactsRouter);
+app.use('/api/contacts', contactsRouter);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

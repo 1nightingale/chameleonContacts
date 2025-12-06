@@ -27,7 +27,7 @@ function truncateChecksum(str) {
   return str.slice(0, 30) + "...";
 }
 
-app.get("/contact/:id", async (req, res) => {
+app.get("/raw/contact/:id", async (req, res) => {
   // Prevent caching
   res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
   res.setHeader("Pragma", "no-cache");
